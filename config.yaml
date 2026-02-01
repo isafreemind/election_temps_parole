@@ -3,37 +3,37 @@
 
 sources:
   # Temps de parole 2022 - CSVs Arcom via data.gouv.fr
-  # Format: CSV séparateur ";" / Encodage: UTF-8
+  # Format: CSV séparateur ; / Encodage: UTF-8
   # Colonnes: Service;Circonscription;Candidat;Type de temps;Durée (tranche 6h-9h);...
   temps_parole_2022:
-    description: "Temps de parole et d'antenne des candidats - Présidentielle 2022 (Arcom)"
-    dataset_url: "https://www.data.gouv.fr/datasets/temps-de-parole-des-candidats-election-presidentielle-2022/"
+    description: Temps de parole et d'antenne des candidats - Présidentielle 2022 (Arcom)
+    dataset_url: https://www.data.gouv.fr/datasets/temps-de-parole-des-candidats-election-presidentielle-2022/
     csv_urls:
-      - url: "https://static.data.gouv.fr/resources/temps-de-parole-des-candidats-election-presidentielle-2022/20251009-141859/tp-ta-presidentielle-2022-1er-janvier-au-7-mars-2022-v2.csv"
-        periode: "1er janvier au 7 mars 2022 (équité)"
-      - url: "https://static.data.gouv.fr/resources/temps-de-parole-des-candidats-election-presidentielle-2022/20251009-141746/tp-ta-presidentielle-2022-8-au-27-mars-2022-v2.csv"
-        periode: "8 au 27 mars 2022 (équité renforcée)"
-      - url: "https://static.data.gouv.fr/resources/temps-de-parole-des-candidats-election-presidentielle-2022/20251009-141555/tp-ta-presidentielle-2022-28-mars-au-8-avril-2022.csv"
-        periode: "28 mars au 8 avril 2022 (égalité stricte - 1er tour)"
+      - url: https://static.data.gouv.fr/resources/temps-de-parole-des-candidats-election-presidentielle-2022/20251009-141859/tp-ta-presidentielle-2022-1er-janvier-au-7-mars-2022-v2.csv
+        periode: 1er janvier au 7 mars 2022 (équité)
+      - url: https://static.data.gouv.fr/resources/temps-de-parole-des-candidats-election-presidentielle-2022/20251009-141746/tp-ta-presidentielle-2022-8-au-27-mars-2022-v2.csv
+        periode: 8 au 27 mars 2022 (équité renforcée)
+      - url: https://static.data.gouv.fr/resources/temps-de-parole-des-candidats-election-presidentielle-2022/20251009-141555/tp-ta-presidentielle-2022-28-mars-au-8-avril-2022.csv
+        periode: 28 mars au 8 avril 2022 (égalité stricte - 1er tour)
 
   # Temps de parole 2017 - Données CSA (pas de CSV accessible, données dans data.json)
   temps_parole_2017:
-    description: "Temps de parole des candidats - Présidentielle 2017 (CSA)"
-    source_url: "https://www.politologue.com/Presidentielle2017/TempsParole/"
-    csa_url: "https://www.csa.fr/Proteger/Garantie-des-droits-et-libertes/Proteger-le-pluralisme-politique/La-presidentielle-2017"
-    note: "Données CSA du 1er février au 21 avril 2017, stockées dans data.json"
+    description: Temps de parole des candidats - Présidentielle 2017 (CSA)
+    source_url: https://www.politologue.com/Presidentielle2017/TempsParole/
+    csa_url: https://www.csa.fr/Proteger/Garantie-des-droits-et-libertes/Proteger-le-pluralisme-politique/La-presidentielle-2017
+    note: Données CSA du 1er février au 21 avril 2017, stockées dans data.json
 
   # Résultats élections - Sources officielles
   resultats_elections:
-    description: "Résultats officiels du 1er tour des présidentielles"
+    description: Résultats officiels du 1er tour des présidentielles
     sources:
-      - url: "https://www.conseil-constitutionnel.fr/actualites/resultats-officiels-du-premier-tour-de-l-election-presidentielle"
-        description: "Conseil constitutionnel - Résultats 2017"
-      - url: "https://presidentielle2022.conseil-constitutionnel.fr/les-communiques/resultats-du-premier-tour.html"
-        description: "Conseil constitutionnel - Résultats 2022"
-      - url: "https://www.data.gouv.fr/datasets/donnees-des-elections-agregees"
-        description: "data.gouv.fr - Données agrégées (candidats_results.csv, 2.3 Go)"
-      - url: "https://www.archives-resultats-elections.interieur.gouv.fr/resultats/presidentielle-2022/FE.php"
-        description: "Ministère de l'Intérieur - Archives résultats 2022"
-      - url: "https://www.archives-resultats-elections.interieur.gouv.fr/resultats/presidentielle-2017/FE.php"
-        description: "Ministère de l'Intérieur - Archives résultats 2017"
+      - url: https://www.conseil-constitutionnel.fr/actualites/resultats-officiels-du-premier-tour-de-l-election-presidentielle
+        description: Conseil constitutionnel - Résultats 2017
+      - url: https://presidentielle2022.conseil-constitutionnel.fr/les-communiques/resultats-du-premier-tour.html
+        description: Conseil constitutionnel - Résultats 2022
+      - url: https://www.data.gouv.fr/datasets/donnees-des-elections-agregees
+        description: data.gouv.fr - Données agrégées (candidats_results.csv, 2.3 Go)
+      - url: https://www.archives-resultats-elections.interieur.gouv.fr/resultats/presidentielle-2022/FE.php
+        description: Ministère de l'Intérieur - Archives résultats 2022
+      - url: https://www.archives-resultats-elections.interieur.gouv.fr/resultats/presidentielle-2017/FE.php
+        description: Ministère de l'Intérieur - Archives résultats 2017
