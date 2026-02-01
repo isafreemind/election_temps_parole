@@ -151,9 +151,22 @@ const DATA = {
   }
 };
 
-// Candidats présents aux deux élections
-const COMMON = ["MACRON E.", "LE PEN M.", "MELENCHON J-L.", "DUPONT-AIGNAN N.",
-                "POUTOU P.", "ARTHAUD N.", "LASSALLE J."];
+// Tous les candidats des deux élections (union), triés par voix 2022 puis 2017
+function getAllCandidates() {
+  const all = new Map();
+  for (const c of DATA["2017"].candidats) all.set(c.nom, { n2017: c });
+  for (const c of DATA["2022"].candidats) {
+    const entry = all.get(c.nom) || {};
+    entry.n2022 = c;
+    all.set(c.nom, entry);
+  }
+  // Trier par voix max entre les deux années
+  return [...all.keys()].sort((a, b) => {
+    const va = Math.max(all.get(a).n2017?.voix || 0, all.get(a).n2022?.voix || 0);
+    const vb = Math.max(all.get(b).n2017?.voix || 0, all.get(b).n2022?.voix || 0);
+    return vb - va;
+  });
+}
 
 const COLORS = [
   '#3b82f6', '#ef4444', '#f59e0b', '#10b981', '#8b5cf6',
@@ -321,9 +334,9 @@ function renderCompare() {
   destroyCharts();
 
   const get = (year, nom) => DATA[year].candidats.find(c => c.nom === nom);
+  const labels = getAllCandidates();
 
-  // Ratio comparison
-  const labels = COMMON;
+  // Ratio comparison (tous les candidats)
   const ratios2017 = labels.map(n => get('2017', n)?.ratio || 0);
   const ratios2022 = labels.map(n => get('2022', n)?.ratio || 0);
 
@@ -339,7 +352,17 @@ function renderCompare() {
     options: {
       indexAxis: 'y',
       responsive: true,
-      plugins: { legend: { display: true } },
+      plugins: {
+        legend: { display: true },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              if (ctx.raw === 0) return ctx.dataset.label + ' : non candidat';
+              return ctx.dataset.label + ' : ' + ctx.raw.toFixed(4) + ' sec/voix';
+            }
+          }
+        }
+      },
       scales: {
         x: { title: { display: true, text: 'Secondes de parole / voix' }, grid: { color: '#1e293b' } },
         y: { grid: { display: false } }
@@ -347,7 +370,7 @@ function renderCompare() {
     }
   });
 
-  document.getElementById('title-ratio').textContent = 'Comparaison 2017 vs 2022 — Ratio sec/voix (candidats communs)';
+  document.getElementById('title-ratio').textContent = 'Comparaison 2017 vs 2022 — Ratio sec/voix (tous les candidats)';
 
   // Temps comparison
   const tp2017 = labels.map(n => secondsToHours(get('2017', n)?.tp || 0));
@@ -365,6 +388,16 @@ function renderCompare() {
     options: {
       indexAxis: 'y',
       responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              if (ctx.raw === 0) return ctx.dataset.label + ' : non candidat';
+              return ctx.dataset.label + ' : ' + ctx.raw + 'h';
+            }
+          }
+        }
+      },
       scales: {
         x: { title: { display: true, text: 'Heures' }, grid: { color: '#1e293b' } },
         y: { grid: { display: false } }
@@ -392,7 +425,12 @@ function renderCompare() {
       responsive: true,
       plugins: {
         tooltip: {
-          callbacks: { label: ctx => ctx.dataset.label + ' : ' + ctx.raw.toLocaleString('fr-FR') + ' voix' }
+          callbacks: {
+            label: ctx => {
+              if (ctx.raw === 0) return ctx.dataset.label + ' : non candidat';
+              return ctx.dataset.label + ' : ' + ctx.raw.toLocaleString('fr-FR') + ' voix';
+            }
+          }
         }
       },
       scales: {
@@ -405,7 +443,7 @@ function renderCompare() {
 
   document.getElementById('title-voix').textContent = 'Voix — 2017 vs 2022';
 
-  // Scatter both years
+  // Scatter both years (tous les candidats)
   const makePoints = (year, color) =>
     DATA[year].candidats.map(c => ({
       label: c.nom + ' (' + year + ')',
