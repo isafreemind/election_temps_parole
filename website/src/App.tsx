@@ -9,6 +9,7 @@ import { Top3VsOthers } from './components/charts/Top3VsOthers';
 import { DistributionChart } from './components/charts/DistributionChart';
 import { ThresholdChart } from './components/charts/ThresholdChart';
 import { EvolutionChart } from './components/charts/EvolutionChart';
+import { MediaAnalysis } from './components/MediaAnalysis';
 import { ResearchSection } from './components/ResearchSection';
 import { electionData } from './data';
 import { BiTimeFive } from 'react-icons/bi';
@@ -18,7 +19,7 @@ import { HiChartBar } from 'react-icons/hi';
 import { GiTargetDummy } from 'react-icons/gi';
 import { IoGitCompare } from 'react-icons/io5';
 
-type ViewMode = '2017' | '2022' | 'compare';
+type ViewMode = '2017' | '2022' | 'compare' | 'analysis';
 
 export const App = () => {
   const [selectedYear, setSelectedYear] = useState<ViewMode>('2022');
@@ -45,7 +46,9 @@ export const App = () => {
           onYearChange={setSelectedYear}
         />
 
-        {selectedYear === 'compare' ? (
+        {selectedYear === 'analysis' ? (
+          <MediaAnalysis data2017={electionData['2017']} data2022={electionData['2022']} />
+        ) : selectedYear === 'compare' ? (
           <div style={{ marginTop: '32px' }}>
             <ChartCard title="Évolution 2017 vs 2022" icon={<IoGitCompare />}>
               <EvolutionChart data2017={data2017} data2022={data2022} />

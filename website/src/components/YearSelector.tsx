@@ -1,9 +1,9 @@
-import { MdHowToVote } from 'react-icons/md';
+import { MdHowToVote, MdAnalytics } from 'react-icons/md';
 import { IoGitCompare } from 'react-icons/io5';
 
 interface YearSelectorProps {
-  selectedYear: '2017' | '2022' | 'compare';
-  onYearChange: (year: '2017' | '2022' | 'compare') => void;
+  selectedYear: '2017' | '2022' | 'compare' | 'analysis';
+  onYearChange: (year: '2017' | '2022' | 'compare' | 'analysis') => void;
 }
 
 export const YearSelector = ({ selectedYear, onYearChange }: YearSelectorProps) => {
@@ -58,6 +58,13 @@ export const YearSelector = ({ selectedYear, onYearChange }: YearSelectorProps) 
       >
         <IoGitCompare style={{ display: 'inline', marginRight: '0.5rem', verticalAlign: 'middle' }} size={20} />
         Comparaison
+      </button>
+      <button 
+        style={buttonStyle('analysis')}
+        onClick={() => onYearChange('analysis')}
+      >
+        <MdAnalytics style={{ display: 'inline', marginRight: '0.5rem', verticalAlign: 'middle' }} size={20} />
+        Analyse
       </button>
     </div>
   );
