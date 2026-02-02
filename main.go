@@ -156,9 +156,21 @@ func loadData(path string) (*DataJSON, error) {
 func downloadAndParseTempsParole2022(config *Config) (map[string]int, error) {
 	totals := make(map[string]int)
 
+	// Créer le répertoire data s'il n'existe pas
+	if err := os.MkdirAll("data", 0755); err != nil {
+		return nil, fmt.Errorf("création répertoire data: %w", err)
+	}
+
 	for _, src := range config.Sources.TempsParole2022.CSVURLs {
 		fmt.Printf("  Téléchargement: %s\n", src.Periode)
-		records, err := downloadCSV(src.URL)
+		
+		// Générer un nom de fichier à partir de la période
+		filename := strings.ReplaceAll(strings.ToLower(src.Periode), " ", "_")
+		filename = strings.ReplaceAll(filename, "à", "a")
+		filename = strings.ReplaceAll(filename, "é", "e")
+		filepath := fmt.Sprintf("data/%s.csv", filename)
+		
+		records, err := downloadAndSaveCSV(src.URL, filepath)
 		if err != nil {
 			return nil, fmt.Errorf("CSV %s: %w", src.Periode, err)
 		}
@@ -185,8 +197,8 @@ func downloadAndParseTempsParole2022(config *Config) (map[string]int, error) {
 	return totals, nil
 }
 
-// downloadCSV télécharge un fichier CSV et retourne les lignes parsées
-func downloadCSV(url string) ([][]string, error) {
+// downloadAndSaveCSV télécharge un fichier CSV, le sauvegarde et retourne les lignes parsées
+func downloadAndSaveCSV(url string, filepath string) ([][]string, error) {
 	client := &http.Client{Timeout: 60 * time.Second}
 	resp, err := client.Get(url)
 	if err != nil {
@@ -198,8 +210,20 @@ func downloadCSV(url string) ([][]string, error) {
 		return nil, fmt.Errorf("HTTP %d", resp.StatusCode)
 	}
 
+	// Lire tout le contenu
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("lecture body: %w", err)
+	}
+
+	// Sauvegarder le fichier
+	if err := os.WriteFile(filepath, body, 0644); err != nil {
+		return nil, fmt.Errorf("sauvegarde fichier: %w", err)
+	}
+	fmt.Printf("    → Sauvegardé: %s (%d octets)\n", filepath, len(body))
+
 	// Les CSVs Arcom sont en Latin-1, conversion vers UTF-8
-	reader := charmap.ISO8859_1.NewDecoder().Reader(resp.Body)
+	reader := charmap.ISO8859_1.NewDecoder().Reader(strings.NewReader(string(body)))
 
 	csvReader := csv.NewReader(reader)
 	csvReader.Comma = ';'
