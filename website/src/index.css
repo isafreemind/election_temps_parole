@@ -13,8 +13,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 a {
@@ -24,4 +23,8 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+html {
+  scroll-behavior: smooth;
 }

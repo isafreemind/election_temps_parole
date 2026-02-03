@@ -1,39 +1,40 @@
+import { Box, Heading, Text, Flex } from '@chakra-ui/react';
 import { HiChartBar } from 'react-icons/hi';
 import { MdHowToVote } from 'react-icons/md';
 
 export const Header = () => {
   return (
-    <header style={{
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      color: 'white',
-      padding: '3rem 2rem',
-      textAlign: 'center',
-      boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-    }}>
-      <h1 style={{ 
-        fontSize: '2.5rem', 
-        marginBottom: '1rem',
-        textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
-        fontFamily: 'system-ui, -apple-system, sans-serif',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '1rem'
-      }}>
-        <HiChartBar size={40} /> Analyse Temps de Parole vs Votes
-      </h1>
-      <p style={{ 
-        fontSize: '1.2rem', 
-        opacity: 0.95,
-        maxWidth: '800px',
-        margin: '0 auto',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '0.5rem'
-      }}>
-        <MdHowToVote size={24} /> Présidentielles 2017 & 2022 - Comparaison médias / résultats électoraux
-      </p>
-    </header>
+    <Box
+      as="header"
+      bgGradient="linear(to-br, #667eea, #764ba2)"
+      color="white"
+      p={{ base: 6, sm: 8, lg: 12 }}
+      textAlign="center"
+      boxShadow="lg"
+    >
+      <Heading
+        size={{ base: 'xl', sm: '2xl', lg: '3xl' }}
+        mb={{ base: 3, sm: 4 }}
+        fontWeight="bold"
+        textShadow="0 2px 4px rgba(0,0,0,0.1)"
+      >
+        <Flex align="center" justify="center" gap={{ base: 3, sm: 4 }} flexWrap="wrap">
+          <Box as={HiChartBar} fontSize={{ base: '40px', sm: '48px', lg: '60px' }} />
+          <span>Analyse Temps de Parole vs Votes</span>
+        </Flex>
+      </Heading>
+      <Text
+        fontSize={{ base: 'md', sm: 'lg', lg: 'xl' }}
+        opacity={0.95}
+        maxW="4xl"
+        mx="auto"
+        px={4}
+      >
+        <Flex align="center" justify="center" gap={2} flexWrap="wrap">
+          <Box as={MdHowToVote} fontSize={{ base: '20px', sm: '24px' }} />
+          <span>Présidentielles 2017 & 2022 - Comparaison médias / résultats électoraux</span>
+        </Flex>
+      </Text>
+    </Box>
   );
 };

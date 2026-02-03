@@ -1,3 +1,4 @@
+import { Box, Heading, SimpleGrid, Flex, Text, Link } from '@chakra-ui/react';
 import { GiNewspaper } from 'react-icons/gi';
 import { FaFlask, FaTv, FaFlagCheckered, FaEye, FaGlobe, FaBook } from 'react-icons/fa';
 
@@ -56,191 +57,156 @@ export const ResearchSection = () => {
   ];
 
   return (
-    <div style={{
-      background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-      padding: '3rem',
-      marginTop: '3rem',
-      borderRadius: '16px'
-    }}>
-      <h2 style={{ 
-        color: '#e2e8f0', 
-        fontSize: '2rem', 
-        marginBottom: '2rem',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '1rem'
-      }}>
-        <FaBook size={32} /> Contexte Scientifique
-      </h2>
+    <Box
+      bgGradient="linear(to-br, gray.700, gray.800)"
+      p={{ base: 6, sm: 8, lg: 12 }}
+      mt={{ base: 8, sm: 12 }}
+      borderRadius="2xl"
+    >
+      <Heading
+        as="h2"
+        color="white"
+        fontSize={{ base: '2xl', sm: '3xl' }}
+        mb={{ base: 6, sm: 8 }}
+      >
+        <Flex align="center" gap={{ base: 3, sm: 4 }}>
+          <Box as={FaBook} fontSize={{ base: '3xl', sm: '4xl' }} />
+          <span>Contexte Scientifique</span>
+        </Flex>
+      </Heading>
       
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '1.5rem',
-        marginBottom: '3rem'
-      }}>
+      <SimpleGrid columns={{ base: 2, lg: 4 }} gap={{ base: 3, sm: 4, lg: 6 }} mb={{ base: 8, sm: 12 }}>
         {stats.map((stat, idx) => (
-          <div key={idx} style={{
-            background: '#0f172a',
-            borderRadius: '12px',
-            padding: '1.5rem',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}>
-            <div style={{ 
-              fontSize: '2.5rem', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              color: '#667eea'
-            }}>
-              {stat.icon}
-            </div>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#667eea' }}>{stat.value}</div>
-            <div style={{ fontSize: '0.95rem', color: '#94a3b8' }}>{stat.label}</div>
-          </div>
+          <Box
+            key={idx}
+            bg="gray.800"
+            borderRadius="xl"
+            p={{ base: 4, sm: 6 }}
+            textAlign="center"
+          >
+            <Flex direction="column" align="center" gap={2}>
+              <Box fontSize={{ base: '4xl', sm: '5xl' }} color="#667eea">
+                {stat.icon}
+              </Box>
+              <Text fontSize={{ base: '2xl', sm: '3xl' }} fontWeight="bold" color="#667eea">
+                {stat.value}
+              </Text>
+              <Text fontSize={{ base: 'xs', sm: 'sm' }} color="gray.300">
+                {stat.label}
+              </Text>
+            </Flex>
+          </Box>
         ))}
-      </div>
+      </SimpleGrid>
 
-      <h3 style={{ 
-        color: '#e2e8f0', 
-        fontSize: '1.5rem', 
-        marginTop: '3rem',
-        marginBottom: '1.5rem',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.75rem'
-      }}>
-        <FaBook size={24} /> Chiffres clés de la recherche
-      </h3>
+      <Heading
+        as="h3"
+        color="white"
+        fontSize={{ base: 'xl', sm: '2xl' }}
+        mt={{ base: 8, sm: 12 }}
+        mb={{ base: 4, sm: 6 }}
+      >
+        <Flex align="center" gap={{ base: 2, sm: 3 }}>
+          <Box as={FaBook} fontSize={{ base: '2xl', sm: '3xl' }} />
+          <span>Chiffres clés de la recherche</span>
+        </Flex>
+      </Heading>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-        gap: '1.5rem',
-        marginBottom: '3rem'
-      }}>
+      <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} gap={{ base: 4, sm: 6 }} mb={{ base: 8, sm: 12 }}>
         {keyFigures.map((figure, idx) => (
-          <div key={idx} style={{
-            background: 'white',
-            borderRadius: '12px',
-            padding: '1.5rem',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '0.75rem'
-          }}>
-            <div style={{ 
-              fontSize: '2.5rem', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              color: '#667eea'
-            }}>
-              {figure.icon}
-            </div>
-            <div style={{ 
-              fontSize: '2.5rem', 
-              fontWeight: 'bold', 
-              color: '#8b5cf6'
-            }}>
-              {figure.value}
-            </div>
-            <div style={{ 
-              fontSize: '1.1rem', 
-              fontWeight: 'bold', 
-              color: '#1e293b'
-            }}>
-              {figure.label}
-            </div>
-            <div style={{ 
-              fontSize: '0.9rem', 
-              color: '#64748b'
-            }}>
-              {figure.description}
-            </div>
-          </div>
+          <Box
+            key={idx}
+            bg="white"
+            borderRadius="xl"
+            p={{ base: 4, sm: 6 }}
+            boxShadow="lg"
+            textAlign="center"
+          >
+            <Flex direction="column" align="center" gap={3}>
+              <Box fontSize={{ base: '4xl', sm: '5xl' }} color="#667eea">
+                {figure.icon}
+              </Box>
+              <Text fontSize={{ base: '3xl', sm: '4xl' }} fontWeight="bold" color="purple.600">
+                {figure.value}
+              </Text>
+              <Text fontSize={{ base: 'md', sm: 'lg' }} fontWeight="bold" color="gray.800">
+                {figure.label}
+              </Text>
+              <Text fontSize={{ base: 'xs', sm: 'sm' }} color="gray.600">
+                {figure.description}
+              </Text>
+            </Flex>
+          </Box>
         ))}
-      </div>
+      </SimpleGrid>
 
-      <h3 style={{ 
-        color: '#e2e8f0', 
-        fontSize: '1.5rem', 
-        marginBottom: '1.5rem',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.75rem'
-      }}>
-        <GiNewspaper size={24} /> Études académiques
-      </h3>
+      <Heading
+        as="h3"
+        color="white"
+        fontSize={{ base: 'xl', sm: '2xl' }}
+        mb={{ base: 4, sm: 6 }}
+      >
+        <Flex align="center" gap={{ base: 2, sm: 3 }}>
+          <Box as={GiNewspaper} fontSize={{ base: '2xl', sm: '3xl' }} />
+          <span>Études académiques</span>
+        </Flex>
+      </Heading>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-        gap: '1.5rem'
-      }}>
+      <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 4, sm: 6 }}>
         {studies.map((study, idx) => (
-          <a 
-            key={idx} 
+          <Link
+            key={idx}
             href={study.link}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              background: 'white',
-              padding: '1.5rem',
-              borderRadius: '12px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-              display: 'flex',
-              gap: '1rem',
-              textDecoration: 'none',
-              transition: 'transform 0.2s, box-shadow 0.2s',
-              cursor: 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-            }}
+            _hover={{ textDecoration: 'none' }}
           >
-            <div style={{ 
-              fontSize: '2rem', 
-              flexShrink: 0, 
-              display: 'flex', 
-              alignItems: 'flex-start', 
-              paddingTop: '0.25rem',
-              color: '#667eea'
-            }}>
-              {study.icon}
-            </div>
-            <div>
-              <h4 style={{ 
-                color: '#667eea', 
-                marginBottom: '0.5rem', 
-                fontSize: '1.1rem',
-                fontWeight: 'bold'
-              }}>
-                {study.title}
-              </h4>
-              <p style={{ 
-                color: '#64748b', 
-                fontSize: '0.95rem', 
-                lineHeight: '1.5',
-                margin: 0
-              }}>
-                {study.description}
-              </p>
-            </div>
-          </a>
+            <Box
+              bg="white"
+              p={{ base: 4, sm: 6 }}
+              borderRadius="xl"
+              boxShadow="lg"
+              transition="all 0.2s"
+              h="full"
+              minH={{ base: '180px', sm: '200px' }}
+              display="flex"
+              _hover={{
+                transform: 'translateY(-4px)',
+                boxShadow: 'xl'
+              }}
+            >
+              <Flex gap={{ base: 3, sm: 4 }}>
+                <Box
+                  fontSize={{ base: '3xl', sm: '4xl' }}
+                  flexShrink={0}
+                  pt={1}
+                  color="#667eea"
+                >
+                  {study.icon}
+                </Box>
+                <Box flex={1} minW={0}>
+                  <Heading
+                    as="h4"
+                    color="#667eea"
+                    mb={2}
+                    fontSize={{ base: 'md', sm: 'lg' }}
+                    fontWeight="bold"
+                  >
+                    {study.title}
+                  </Heading>
+                  <Text
+                    color="gray.600"
+                    fontSize={{ base: 'sm', sm: 'md' }}
+                    lineHeight="relaxed"
+                  >
+                    {study.description}
+                  </Text>
+                </Box>
+              </Flex>
+            </Box>
+          </Link>
         ))}
-      </div>
-    </div>
+      </SimpleGrid>
+    </Box>
   );
 };

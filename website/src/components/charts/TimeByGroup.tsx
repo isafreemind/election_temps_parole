@@ -46,7 +46,7 @@ export const TimeByGroup = ({ candidates }: TimeByGroupProps) => {
       <BarChart 
         data={data} 
         layout="vertical"
-        margin={{ top: 20, right: 30, left: 120, bottom: 20 }}
+        margin={{ top: 20, right: 10, left: 80, bottom: 20 }}
       >
         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
         <XAxis 

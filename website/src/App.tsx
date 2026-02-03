@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Box, Container, SimpleGrid, Stack } from '@chakra-ui/react';
 import { Header } from './components/Header';
 import { YearSelector } from './components/YearSelector';
 import { ChartCard } from './components/ChartCard';
@@ -29,18 +30,10 @@ export const App = () => {
   const currentData = selectedYear === '2017' ? electionData['2017'] : electionData['2022'];
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundColor: '#0f172a',
-      paddingBottom: '48px'
-    }}>
+    <Box minH="100vh" bg="#0f172a" pb={12} overflowX="hidden">
       <Header />
       
-      <div style={{
-        maxWidth: '1400px',
-        margin: '0 auto',
-        padding: '24px'
-      }}>
+      <Container maxW="7xl" px={{ base: 2, sm: 4, lg: 8 }}>
         <YearSelector 
           selectedYear={selectedYear} 
           onYearChange={setSelectedYear}
@@ -49,32 +42,23 @@ export const App = () => {
         {selectedYear === 'analysis' ? (
           <MediaAnalysis data2017={electionData['2017']} data2022={electionData['2022']} />
         ) : selectedYear === 'compare' ? (
-          <div style={{ marginTop: '32px' }}>
+          <Stack mt={{ base: 4, sm: 8 }} gap={{ base: 3, sm: 6 }}>
             <ChartCard title="Évolution 2017 vs 2022" icon={<IoGitCompare />}>
               <EvolutionChart data2017={data2017} data2022={data2022} />
             </ChartCard>
             
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(600px, 1fr))',
-              gap: '24px',
-              marginTop: '24px'
-            }}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 2, sm: 4, lg: 6 }}>
               <ChartCard title="Effet de seuil 2017" icon={<GiTargetDummy />}>
                 <ThresholdChart candidates={electionData['2017']} />
               </ChartCard>
               <ChartCard title="Effet de seuil 2022" icon={<GiTargetDummy />}>
                 <ThresholdChart candidates={electionData['2022']} />
               </ChartCard>
-            </div>
-          </div>
+            </SimpleGrid>
+          </Stack>
         ) : (
-          <div style={{ marginTop: '32px' }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(600px, 1fr))',
-              gap: '24px'
-            }}>
+          <Stack mt={{ base: 4, sm: 8 }} gap={{ base: 3, sm: 6 }}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 2, sm: 4, lg: 6 }}>
               <ChartCard title="Temps de parole (heures)" icon={<BiTimeFive />}>
                 <TimeByGroup candidates={currentData} />
               </ChartCard>
@@ -82,18 +66,13 @@ export const App = () => {
               <ChartCard title="Ratio : secondes de parole par voix obtenue" icon={<FaBalanceScale />}>
                 <RatioChart candidates={currentData} />
               </ChartCard>
-            </div>
+            </SimpleGrid>
 
             <ChartCard title="Temps de parole vs Voix (taille = % de voix)" icon={<MdBubbleChart />}>
               <BubbleChart candidates={currentData} />
             </ChartCard>
 
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(600px, 1fr))',
-              gap: '24px',
-              marginTop: '24px'
-            }}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 2, sm: 4, lg: 6 }}>
               <ChartCard title="Concentration : candidats monopolisant 50% du temps médiatique" icon={<FaTrophy />}>
                 <Top3VsOthers candidates={currentData} />
               </ChartCard>
@@ -101,17 +80,17 @@ export const App = () => {
               <ChartCard title="Distribution du temps médiatique (avec seuils)" icon={<HiChartBar />}>
                 <DistributionChart candidates={currentData} />
               </ChartCard>
-            </div>
+            </SimpleGrid>
 
             <ChartCard title="Effet de seuil : corrélation temps/voix selon l'exposition" icon={<GiTargetDummy />}>
               <ThresholdChart candidates={currentData} />
             </ChartCard>
-          </div>
+          </Stack>
         )}
 
         <ResearchSection />
-      </div>
-    </div>
+      </Container>
+    </Box>
   );
 };
 

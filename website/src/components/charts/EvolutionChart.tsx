@@ -81,7 +81,7 @@ export const EvolutionChart = ({ data2017, data2022 }: EvolutionChartProps) => {
 
   return (
     <ResponsiveContainer width="100%" height={450}>
-      <BarChart data={data} margin={{ top: 20, right: 30, left: 60, bottom: 60 }}>
+      <BarChart data={data} margin={{ top: 20, right: 20, left: 40, bottom: 50 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
         <XAxis 
           dataKey="annee" 

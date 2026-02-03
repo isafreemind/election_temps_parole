@@ -1,3 +1,4 @@
+import { Box, Button as ChakraButton } from '@chakra-ui/react';
 import { MdHowToVote, MdAnalytics } from 'react-icons/md';
 import { IoGitCompare } from 'react-icons/io5';
 
@@ -7,65 +8,63 @@ interface YearSelectorProps {
 }
 
 export const YearSelector = ({ selectedYear, onYearChange }: YearSelectorProps) => {
-  const buttonStyle = (year: string) => ({
-    padding: '1rem 2rem',
-    margin: '0 0.5rem',
-    fontSize: '1.1rem',
-    fontWeight: 'bold' as const,
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    background: selectedYear === year 
-      ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-      : '#f0f0f0',
-    color: selectedYear === year ? 'white' : '#333',
-    boxShadow: selectedYear === year 
-      ? '0 4px 12px rgba(102, 126, 234, 0.4)'
-      : '0 2px 4px rgba(0,0,0,0.1)',
-    transform: selectedYear === year ? 'translateY(-2px)' : 'none',
-    fontFamily: 'system-ui, -apple-system, sans-serif'
-  });
+  const Button = ({ year, icon, label, mobileLabel }: { 
+    year: '2017' | '2022' | 'compare' | 'analysis'; 
+    icon: React.ReactNode; 
+    label: string;
+    mobileLabel?: string;
+  }) => {
+    const isActive = selectedYear === year;
+    
+    return (
+      <ChakraButton
+        onClick={() => onYearChange(year)}
+        px={{ base: 4, sm: 8 }}
+        py={{ base: 3, sm: 4 }}
+        mx={{ base: 1, sm: 2 }}
+        fontSize={{ base: 'md', sm: 'lg' }}
+        fontWeight="bold"
+        borderRadius="lg"
+        transition="all 0.3s ease-in-out"
+        bgGradient={isActive ? "linear(to-br, #667eea, #764ba2)" : undefined}
+        bg={!isActive ? "gray.100" : undefined}
+        color={isActive ? "white" : "gray.800"}
+        boxShadow={isActive ? "lg" : "md"}
+        transform={isActive ? "translateY(-2px)" : undefined}
+        _hover={{
+          boxShadow: "lg"
+        }}
+      >
+        {icon}
+        <Box display={{ base: 'none', sm: 'inline' }}>
+          {label}
+        </Box>
+        <Box display={{ base: 'inline', sm: 'none' }}>
+          {mobileLabel || label}
+        </Box>
+      </ChakraButton>
+    );
+  };
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      padding: '2rem',
-      background: 'white',
-      borderRadius: '12px',
-      margin: '2rem auto',
-      maxWidth: '600px',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-    }}>
-      <button 
-        style={buttonStyle('2017')}
-        onClick={() => onYearChange('2017')}
-      >
-        <MdHowToVote style={{ display: 'inline', marginRight: '0.5rem', verticalAlign: 'middle' }} size={20} />
-        2017
-      </button>
-      <button 
-        style={buttonStyle('2022')}
-        onClick={() => onYearChange('2022')}
-      >
-        <MdHowToVote style={{ display: 'inline', marginRight: '0.5rem', verticalAlign: 'middle' }} size={20} />
-        2022
-      </button>
-      <button 
-        style={buttonStyle('compare')}
-        onClick={() => onYearChange('compare')}
-      >
-        <IoGitCompare style={{ display: 'inline', marginRight: '0.5rem', verticalAlign: 'middle' }} size={20} />
-        Comparaison
-      </button>
-      <button 
-        style={buttonStyle('analysis')}
-        onClick={() => onYearChange('analysis')}
-      >
-        <MdAnalytics style={{ display: 'inline', marginRight: '0.5rem', verticalAlign: 'middle' }} size={20} />
-        Analyse
-      </button>
-    </div>
+    <Box
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="center"
+      p={{ base: 4, sm: 8 }}
+      bg="white"
+      borderRadius="xl"
+      my={{ base: 4, sm: 8 }}
+      mx="auto"
+      maxW="4xl"
+      boxShadow="md"
+      gap={2}
+    >
+      <Button year="2017" icon={<MdHowToVote size={20} />} label="2017" />
+      <Button year="2022" icon={<MdHowToVote size={20} />} label="2022" />
+      <Button year="compare" icon={<IoGitCompare size={20} />} label="Comparaison" mobileLabel="Comp." />
+      <Button year="analysis" icon={<MdAnalytics size={20} />} label="Analyse" />
+    </Box>
   );
 };
+

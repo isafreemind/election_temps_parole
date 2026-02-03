@@ -52,7 +52,7 @@ export const DistributionChart = ({ candidates }: DistributionChartProps) => {
 
   return (
     <ResponsiveContainer width="100%" height={450}>
-      <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 100 }}>
+      <BarChart data={data} margin={{ top: 20, right: 20, left: 10, bottom: 80 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
         <XAxis 
           dataKey="nom" 

@@ -42,7 +42,7 @@ export const BubbleChart = ({ candidates }: BubbleChartProps) => {
 
   return (
     <ResponsiveContainer width="100%" height={450}>
-      <ScatterChart margin={{ top: 20, right: 30, left: 50, bottom: 50 }}>
+      <ScatterChart margin={{ top: 20, right: 20, left: 20, bottom: 40 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
         <XAxis 
           type="number" 
